@@ -585,12 +585,12 @@ let myCategory = 'History';
 // makePost(myTitle, myText, myAuthor, myCategory); 
 
 const updatePost = (blogId, updateTitle, updateText, updateAuthor, updateCategory) => {
-    const blogToUpdate = findPost(blogId);
+    const blogToUpdate = findPost(blogId)[0];
 
-    const blogTitle = updateTitle ? updateTitle : blogToUpdate[0].title;
-    const blogText = updateText ? updateText : blogToUpdate[0].text;
-    const blogAuthor = updateAuthor ? updateAuthor : blogToUpdate[0].author;
-    const blogCategory = updateCategory ? updateCategory : blogToUpdate[0].category;
+    const blogTitle = updateTitle ? updateTitle : blogToUpdate.title;
+    const blogText = updateText ? updateText : blogToUpdate.text;
+    const blogAuthor = updateAuthor ? updateAuthor : blogToUpdate.author;
+    const blogCategory = updateCategory ? updateCategory : blogToUpdate.category;
 
     const updatedBlog = {
         lastModified: new Date(),
