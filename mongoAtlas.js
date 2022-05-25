@@ -564,8 +564,8 @@ const makePost = (title, text, author, category) => {
     const blogCategory = category ? category : '';
     
     const newBlog = {
-    createdAt: new Date().toISOString(),
-    lastModified: new Date().toISOString(), 
+    createdAt: new Date(),
+    lastModified: new Date(), 
     title: blogTitle,
     text: blogText,
     author: blogAuthor,
@@ -592,7 +592,7 @@ const updatePost = (blogId, updateTitle, updateText, updateAuthor, updateCategor
     
     const updatedBlog = {
     createdAt: blogToUpdate[0].createdAt,
-    lastModified: new Date().toISOString(), 
+    lastModified: new Date(), 
     title: blogTitle,
     text: blogText,
     author: blogAuthor,
@@ -611,6 +611,8 @@ let blogId = 51;
 // updatePost(blogId, newTitle, newText, newAuthor, newCategory);
 
 // console.log(findPost(blogId));
+
+// db.posts50.find({})
 
 
 
