@@ -541,3 +541,77 @@
 
 
 
+
+// *** WEDNESDAY HOMEWORK ***
+const findPost = (blogId) => {
+    const dbFilter = blogId ? {id: blogId} : {};
+    const dbResult = db.posts50.find(dbFilter).toArray();
+    return dbResult;
+}
+
+// console.log(findPost(4));
+
+const getPostsCollectionLength = () => {
+    return db.posts50.count();
+}
+
+// console.log(getPostsCollectionLength());
+
+const makePost = (title, text, author, category) => {
+    const blogTitle = title ? title : '';
+    const blogText = text ? text : '';
+    const blogAuthor = author ? author : '';
+    const blogCategory = category ? category : '';
+    
+    const newBlog = {
+    createdAt: new Date().toISOString(),
+    lastModified: new Date().toISOString(), 
+    title: blogTitle,
+    text: blogText,
+    author: blogAuthor,
+    category: blogCategory,
+    id: getPostsCollectionLength() + 1,
+    };
+    return db.post50.insertOne(newBlog);
+}
+
+let myTitle = 'A Review of Roman History';
+let myText = 'Back in the day, there was a guy named Julius Ceasar. And he was an awewsome general that kicked major butt. In fact he was so awesome that all his soldiers loved him and pledged loyalty to him. With the help of his men, he took power of Rome.';
+let myAuthor = 'Corey S';
+let myCategory = 'History';
+
+// makePost(myTitle, myText, myAuthor, myCategory); 
+
+const updatePost = (blogId, updateTitle, updateText, updateAuthor, updateCategory) => {
+    const blogToUpdate = findPost(blogId);
+    
+    const blogTitle = updateTitle ? updateTitle : blogToUpdate[0].title;
+    const blogText = updateText ? updateText : blogToUpdate[0].text;
+    const blogAuthor = updateAuthor ? updateAuthor : blogToUpdate[0].author;
+    const blogCategory = updateCategory ? updateCategory :blogToUpdate[0].category;
+    
+    const updatedBlog = {
+    createdAt: blogToUpdate[0].createdAt,
+    lastModified: new Date().toISOString(), 
+    title: blogTitle,
+    text: blogText,
+    author: blogAuthor,
+    category: blogCategory,
+    id: blogId,
+    };
+    return db.posts50.updateOne({id: blogId},{$set: updatedBlog});
+}
+
+let newTitle = 'Roman History';
+let newText = 'Way back in the day, before Christ, there was a guy named Julius Ceasar. And he was an awewsome general that kicked major butt. In fact he was so awesome that all his soldiers loved him and pledged loyalty to him. With the help of his men, he took power of Rome.';
+let newAuthor = '';
+let newCategory = '';
+let blogId = 51;
+
+// updatePost(blogId, newTitle, newText, newAuthor, newCategory);
+
+// console.log(findPost(blogId));
+
+
+
+
