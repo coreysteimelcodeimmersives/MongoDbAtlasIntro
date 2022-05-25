@@ -544,7 +544,9 @@
 
 // *** WEDNESDAY HOMEWORK ***
 const findPost = (blogId) => {
-    const dbFilter = blogId ? {id: blogId} : {};
+    const dbFilter = blogId ? {
+        id: blogId
+    } : {};
     const dbResult = db.posts50.find(dbFilter).toArray();
     return dbResult;
 }
@@ -562,15 +564,15 @@ const makePost = (title, text, author, category) => {
     const blogText = text ? text : '';
     const blogAuthor = author ? author : '';
     const blogCategory = category ? category : '';
-    
+
     const newBlog = {
-    createdAt: new Date(),
-    lastModified: new Date(), 
-    title: blogTitle,
-    text: blogText,
-    author: blogAuthor,
-    category: blogCategory,
-    id: getPostsCollectionLength() + 1,
+        createdAt: new Date(),
+        lastModified: new Date(),
+        title: blogTitle,
+        text: blogText,
+        author: blogAuthor,
+        category: blogCategory,
+        id: getPostsCollectionLength() + 1,
     };
     return db.post50.insertOne(newBlog);
 }
@@ -584,22 +586,24 @@ let myCategory = 'History';
 
 const updatePost = (blogId, updateTitle, updateText, updateAuthor, updateCategory) => {
     const blogToUpdate = findPost(blogId);
-    
+
     const blogTitle = updateTitle ? updateTitle : blogToUpdate[0].title;
     const blogText = updateText ? updateText : blogToUpdate[0].text;
     const blogAuthor = updateAuthor ? updateAuthor : blogToUpdate[0].author;
-    const blogCategory = updateCategory ? updateCategory :blogToUpdate[0].category;
-    
+    const blogCategory = updateCategory ? updateCategory : blogToUpdate[0].category;
+
     const updatedBlog = {
-    createdAt: blogToUpdate[0].createdAt,
-    lastModified: new Date(), 
-    title: blogTitle,
-    text: blogText,
-    author: blogAuthor,
-    category: blogCategory,
-    id: blogId,
+        lastModified: new Date(),
+        title: blogTitle,
+        text: blogText,
+        author: blogAuthor,
+        category: blogCategory,
     };
-    return db.posts50.updateOne({id: blogId},{$set: updatedBlog});
+    return db.posts50.updateOne({
+        id: blogId
+    }, {
+        $set: updatedBlog
+    });
 }
 
 let newTitle = 'Roman History';
@@ -613,7 +617,3 @@ let blogId = 51;
 // console.log(findPost(blogId));
 
 // db.posts50.find({})
-
-
-
-
