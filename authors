@@ -1,0 +1,18 @@
+let authors = [
+  'Traci Bins DVM',     'Jacqueline Hudson',  'Miguel Hackett',
+  'Sonja Considine',    'Sara Hickle',        'Rosa Stoltenberg',
+  'Santos Huels',       'Edmond Heidenreich', 'Rochelle Stamm',
+  'Marlon White',       'Jill Reinger',       'Laura Bosco Sr.',
+  'Erica Gislason',     'Randy Maggio',       'Dr. Duane Crist',
+  'Jeff Prosacco',      'Cory Abernathy',     'Ken Schneider',
+  'Martin Quitzon',     'Tom Botsford',       'Jeanne Koepp',
+  'Hattie Jacobs',      'Tami Kreiger',       'Joan Satterfield',
+  'Inez Rosenbaum',     'Maureen Langosh',    'Abel Dach',
+  'Sharon Emmerich',    'Miss Sonja Farrell', 'Delia Abernathy',
+  'Wilma Hintz',        'Ms. Ellen Davis',    'Blanca Hirthe',
+  'Norman Legros',      'Terrence Lueilwitz', 'Tamara Cormier',
+  'Randal Will IV',     'Ernestine Hand',     'Kelvin Huels',
+  'Nicole Pacocha DDS', 'Caroline MacGyver',  'Travis Boehm Sr.',
+  'Ms. Rick Orn',       'Jesse Windler',      'Perry Runte',
+  'Rodolfo Mertz DDS',  'Jean MacGyver',      'Kurt Hamill'
+]

@@ -576,7 +576,7 @@ const makePost = (title, text, author, category) => {
         category: blogCategory,
         id: getPostsCollectionLength() + 1,
     };
-    return db.post50.insertOne(newBlog);
+    return db.posts50.insertOne(newBlog);
 }
 
 let myTitle = 'A Review of Roman History';
@@ -627,3 +627,61 @@ const deletePosts = (blogIds) => {
 const blogsIdArr = [51, 50, 49];
 
 // deletePosts(blogsIdArr); 
+
+const getAuthorNames = () => {
+    const authorNamesArr = [];
+    const blogsArr = db.posts50.find({}).toArray();
+    for (let i = 0; i < blogsArr.length; i++){
+        let shouldPush = true;
+        const currentBlogAuthor = blogsArr[i].author;
+        for (let name of authorNamesArr){
+            if (name === currentBlogAuthor){
+                shouldPush = false;
+            }
+        }
+        if (shouldPush){
+            authorNamesArr.push(currentBlogAuthor);
+        }
+    }
+    return authorNamesArr;
+}
+
+// console.log(getAuthorNames());
+
+const allTheUsers = (authorArr) => {
+    for (let i = 0; i < authorArr.length; i++){
+        const fullName = authorArr[i];
+        const person = authorArr[i].split(" ");
+        const personFirstName = person[0];
+        const personLastName = person[1];
+        const personOptAFirstName = person[1];
+        const personOptALastName = person[2];
+        const firstName = personFirstName == 'Ms.' || personFirstName == 'Miss' || personFirstName == 'Dr.' ? personOptAFirstName : personFirstName;
+        const lastName = personFirstName == 'Ms.' || personFirstName == 'Miss' || personFirstName == 'Dr.' ? personOptALastName : personLastName;
+        
+        const newUser = {
+            firstName : firstName,
+            lastName : lastName,
+            userId : i + 1,
+            email : `${firstName.toLowerCase()}.${lastName.toLowerCase()}@gmail.com`,
+            posts : getAuthorPostMongoIds(fullName)
+        }
+        
+        db.users.insertOne(newUser);
+    }
+}
+
+const getAuthorPostMongoIds = (authorName) => {
+    const postsArr = db.posts50.find({author : authorName}).toArray();
+    const mongoIdsArr = [];
+    for (let post of postsArr){
+        mongoIdsArr.push((post._id));
+    }
+    return mongoIdsArr;
+}
+
+const allAuthors = getAuthorNames()
+
+// console.log(getAuthorPostMongoIds('Corey S'))
+
+// allTheUsers(allAuthors);
