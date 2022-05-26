@@ -616,6 +616,14 @@ let blogId = 51;
 
 // updatePost(blogId, newTitle, newText, newAuthor, newCategory);
 
-// console.log(findPost(blogId));
+const deletePosts = (blogIds) => {
+    for (let i = 0; i < blogIds.length; i++){
+        console.log(blogIds[i])
+        db.posts50.deleteOne({id: blogIds[i]})
+    }
+    return db.posts50;
+}
 
-// db.posts50.find({})
+const blogsIdArr = [51, 50, 49];
+
+// deletePosts(blogsIdArr); 
