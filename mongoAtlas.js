@@ -524,12 +524,14 @@
 // db.posts50.insertMany(fiftyBlogs);
 
 // *** Write a new function ***
-// const getPosts = (limit = 50, skip = 0, sortField, sortOrder, filterField, filterValue) => {
-//     const dbSort = sortField && sortOrder ? {[sortField]: sortOrder} : {}
-//     const dbFilter = filterField && filterValue ? {[filterField]: filterValue} : {}
-//     const dbResult = db.posts50.find(dbFilter).sort(dbSort).limit(limit).skip(skip).toArray();
-//     return dbResult
-// }
+const getPosts = (limit, skip, sortField, sortOrder, filterField, filterValue) => {
+    const dbLimit = limit ? limit : 25
+    const dbSkip = skip ? skip : 0
+    const dbSort = sortField && sortOrder ? {[sortField]: sortOrder} : {}
+    const dbFilter = filterField && filterValue ? {[filterField]: filterValue} : {}
+    const dbResult = db.posts50.find(dbFilter).sort(dbSort).limit(dbLimit).skip(dbSkip).toArray();
+    return dbResult;
+}
 // console.log(getPosts( '', '', 'id', -1, "", ""));
 
 // db.posts50.find();
