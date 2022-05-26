@@ -685,3 +685,20 @@ const allAuthors = getAuthorNames()
 // console.log(getAuthorPostMongoIds('Corey S'))
 
 // allTheUsers(allAuthors);
+
+const getUser = (email) => {
+    const user = db.users.find({email : email}).toArray()[0];
+    const postsArr = user.posts;
+    const blogDocArr = [];
+    for (let post of postsArr) {
+        const blogDoc = findBlogByKey('_id', post)
+        blogDocArr.push(blogDoc);
+    }
+    user.posts = blogDocArr;
+    return user;
+}
+
+const findBlogByKey = (key, value) => {
+    return db.posts50.find({[key] : value}).toArray()[0];
+}
+// getUser('corey.s@gmail.com')
