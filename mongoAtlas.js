@@ -637,6 +637,7 @@ const getAuthorNames = () => {
         for (let name of authorNamesArr){
             if (name === currentBlogAuthor){
                 shouldPush = false;
+                break;
             }
         }
         if (shouldPush){
